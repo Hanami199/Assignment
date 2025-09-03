@@ -3,7 +3,7 @@
  * See COPYRIGHT in top-level directory.
  */
 
-
+#define _XOPEN_SOURCE 700
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -95,7 +95,8 @@ int output_energy_stat ( int      ,
 
 int fill_buffers(buffers_t *, 
                       const plane_t *,
-                    int);
+                    int,
+                const vec2_t N);
 
 int post_MPI_reqs(MPI_Request *,
                   buffers_t *,
@@ -106,7 +107,8 @@ int post_MPI_reqs(MPI_Request *,
 int copy_halos(buffers_t *buffers, 
               plane_t *plane,
               int* neigh,
-              int);
+              int,
+            const vec2_t N);
 
 // function used to inject energy (from heat sources) onto a plane
 inline int inject_energy( const int      periodic, // if the boundary is periodic

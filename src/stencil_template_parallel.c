@@ -7,7 +7,7 @@
  *
  */
 
-
+#define _XOPEN_SOURCE 700
 #include "stencil_template_parallel.h"
 
 
@@ -113,7 +113,7 @@ int main(int argc, char **argv) {
 
     // [A] fill the buffers, and/or make the buffers' pointers pointing to the correct position
 
-    fill_buffers(buffers, &planes[current], periodic);
+    fill_buffers(buffers, &planes[current], periodic, N);
 
     // We initialize Isend, Irecv (since before #pragma omp parallel we only have the master thread)
     post_MPI_reqs(reqs, buffers, &planes[current], neighbours, myCOMM_WORLD);
@@ -125,7 +125,7 @@ int main(int argc, char **argv) {
 
         // time to copy the halos
         double t1 = MPI_Wtime();
-        copy_halos(buffers, &planes[current], neighbours, periodic);
+        copy_halos(buffers, &planes[current], neighbours, periodic, N);
         double t2 = MPI_Wtime();
 
         // only master writes these 
@@ -196,7 +196,8 @@ int main(int argc, char **argv) {
 // function to fill the buffers (the only one that need filling are the EAST and WEST ones)
 int fill_buffers(buffers_t *buffers, 
                       const plane_t *plane,
-                      int periodic) {
+                      int periodic,
+                    const vec2_t N) {
 
   const unsigned int nx = plane->size[_x_];
   const unsigned int ny = plane->size[_y_];
@@ -212,7 +213,7 @@ int fill_buffers(buffers_t *buffers,
   buffers[RECV][NORTH] = &plane->data[IDX(1,0)]; // north starts from position (1,1) (since we also have the halos in data)
   buffers[RECV][SOUTH] = &plane->data[IDX(1,ny+1)]; 
 
-  if (periodic) {
+  if (periodic && N[_y_]==2) {
     buffers[RECV][NORTH] = &plane->data[IDX(1,ny+1)];  // north starts from position (1,1) (since we also have the halos in data)
     buffers[RECV][SOUTH] = &plane->data[IDX(1,0)]; 
   }
@@ -267,7 +268,8 @@ int post_MPI_reqs(MPI_Request *reqs,
 int copy_halos(buffers_t *buffers, 
               plane_t *plane,
               int* neigh,
-              int periodic) {
+              int periodic,
+              const vec2_t N) {
 
   const unsigned int nx = plane->size[_x_];
   const unsigned int ny = plane->size[_y_];
@@ -288,19 +290,19 @@ int copy_halos(buffers_t *buffers,
   }
 
   // in the periodic case we are working in a sort of torus
-  // if (periodic) {
-  //   if (neigh[WEST] != MPI_PROC_NULL) {
-  //     for (uint j=0; j<ny; j++){
-  //     plane->data[IDX(nx+1, j+1)] = buffers[RECV][WEST][j];
-  //     }
-  //   }
+  if (periodic && N[_x_] == 2) {
+    if (neigh[WEST] != MPI_PROC_NULL) {
+      for (uint j=0; j<ny; j++){
+      plane->data[IDX(nx+1, j+1)] = buffers[RECV][WEST][j];
+      }
+    }
 
-  //   if (neigh[EAST] != MPI_PROC_NULL) {
-  //     for (uint j=0; j<ny; j++){
-  //     plane->data[IDX(0, j+1)] = buffers[RECV][EAST][j];
-  //     }
-  //   }
-  // }
+    if (neigh[EAST] != MPI_PROC_NULL) {
+      for (uint j=0; j<ny; j++){
+      plane->data[IDX(0, j+1)] = buffers[RECV][EAST][j];
+      }
+    }
+  }
 
   #undef IDX
   return 0;
