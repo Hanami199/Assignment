@@ -19,4 +19,4 @@ export OMP_DISPLAY_AFFINITY=TRUE
 module load openMPI/5.0.5
 
 mpicc -O3 -std=c17 -fopenmp   -Iinclude   src/stencil_template_parallel.c   -o stencil_template_parallel
-mpirun -np 1 --map-by none ./stencil_template_parallel -x 256 -y 256 -n 100 -e 20 -p 1 -v 1 > output.log
+mpirun -np 1 --map-by core --bind-to core ./stencil_template_parallel -x 256 -y 256 -n 100 -e 20 -p 1 -v 1 > output.log

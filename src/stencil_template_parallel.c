@@ -7,7 +7,7 @@
  *
  */
 
-
+#define _XOPEN_SOURCE 700
 #include "stencil_template_parallel.h"
 
 

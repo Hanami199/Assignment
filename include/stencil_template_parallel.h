@@ -3,7 +3,7 @@
  * See COPYRIGHT in top-level directory.
  */
 
-
+#define _XOPEN_SOURCE 700
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
