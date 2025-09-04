@@ -207,8 +207,7 @@ inline int update_plane ( const int periodic, // toggle for periodic-nonperiodic
     double * restrict old = oldplane->data; // we will read from this
     double * restrict new = newplane->data; // and write on this
     
-    // #pragma omp parallel for schedule(static)
-    #pragma GCC unroll 4
+    #pragma omp parallel for schedule(static)
     for (uint j = 1; j <= ysize; j++) {
         for ( uint i = 1; i <= xsize; i++)
         {

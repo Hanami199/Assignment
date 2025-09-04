@@ -1,3 +1,5 @@
 venv
-example
+examples
 make_movies.py
+plot_parallel.py
+plot_threadsrankratio.py
