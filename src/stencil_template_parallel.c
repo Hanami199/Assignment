@@ -112,36 +112,30 @@ int main(int argc, char **argv) {
     /* ------------ COMMUNICATIONS & COMPUTATIONS -------------------------- */
 
     // [A] fill the buffers, and/or make the buffers' pointers pointing to the correct position
-
     fill_buffers(buffers, &planes[current], periodic, N);
 
     // We initialize Isend, Irecv (since before #pragma omp parallel we only have the master thread)
     post_MPI_reqs(reqs, buffers, &planes[current], neighbours, myCOMM_WORLD);
+
+    // wait for comms to
+    MPI_Waitall(8, reqs, MPI_STATUSES_IGNORE);
+
+    double t1 = MPI_Wtime();
+    copy_halos(buffers, &planes[current], neighbours, periodic, N);
+    double t2 = MPI_Wtime();
+
+    // only master writes these 
+    comm_sum += t1 - t0;
+    copy_sum += t2 - t1;
+
     
-    #pragma omp parallel /*shared(flag)*/
-    {
-      if (omp_get_thread_num() == 0) {
-        MPI_Waitall(8, reqs, MPI_STATUSES_IGNORE);
-
-        // time to copy the halos
-        double t1 = MPI_Wtime();
-        copy_halos(buffers, &planes[current], neighbours, periodic, N);
-        double t2 = MPI_Wtime();
-
-        // only master writes these 
-        comm_sum += t1 - t0;
-        copy_sum += t2 - t1;
-
-      } 
-
-      #pragma omp barrier
-      update_plane(periodic, N, &planes[current], &planes[!current]);
-    }
+    update_plane(periodic, N, &planes[current], &planes[!current]);
 
     /* output if needed */
     if ( output_energy_stat_perstep )
       output_energy_stat( iter, &planes[!current], (iter+1) * Nsources*energy_per_source, Rank, &myCOMM_WORLD);
 
+    // to create simulations
     char filename[100];
     sprintf( filename, "data_parallel/%d_plane_%05d.bin", Rank, iter );
     int dump_status = dump(planes[!current].data, planes[!current].size, filename);
@@ -152,7 +146,7 @@ int main(int argc, char **argv) {
 
     /* swap plane indexes for the new iteration */
     current = !current; 
-    }
+  }
   
   // after all the comms-computes
   t1 = MPI_Wtime() - t1;
@@ -172,9 +166,10 @@ int main(int argc, char **argv) {
     double comm_mean_all = comm_sum_all/(Niterations * (double)P);
     double copy_mean_all = copy_sum_all/(Niterations * (double)P);
 
-    printf("Average comm waiting time and copy time (averaged across %d ranks): wait=%.6fs, copy=%.6fs\n",
+    printf("Average comm waiting time and copy time (averaged across %d ranks):\n wait=%.6fs\ncopy=%.6fs\n",
           P, comm_mean_all, copy_mean_all);
   }
+
   output_energy_stat ( -1, &planes[!current], Niterations * Nsources*energy_per_source, Rank, &myCOMM_WORLD );
 
 

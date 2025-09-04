@@ -61,7 +61,7 @@ extern int update_plane ( const int      , // periodic or not
 extern int get_total_energy( plane_t *, // plane
                              double  * ); // energy
 
-int dump ( const double *data, const uint size[2], const char *filename);
+extern int dump ( const double *data, const uint size[2], const char *filename);
 
 // function used to initialize everything (planes buffers, comm buffers etc.)
 int initialize ( MPI_Comm *,
@@ -93,18 +93,18 @@ int output_energy_stat ( int      ,
                          int      ,
                          MPI_Comm *);
 
-int fill_buffers(buffers_t *, 
-                      const plane_t *,
-                    int,
-                const vec2_t N);
+extern int fill_buffers(buffers_t *, 
+                        const plane_t *,
+                        int,
+                        const vec2_t N);
 
-int post_MPI_reqs(MPI_Request *,
+extern int post_MPI_reqs(MPI_Request *,
                   buffers_t *,
                   const plane_t *,
                   int *,
                   MPI_Comm );
 
-int copy_halos(buffers_t *buffers, 
+extern int copy_halos(buffers_t *buffers, 
               plane_t *plane,
               int* neigh,
               int,
@@ -206,8 +206,9 @@ inline int update_plane ( const int periodic, // toggle for periodic-nonperiodic
 
     double * restrict old = oldplane->data; // we will read from this
     double * restrict new = newplane->data; // and write on this
-        
-    #pragma omp for nowait schedule(static)
+    
+    #pragma omp parallel for schedule(static)
+    //#pragma GCC unroll 4
     for (uint j = 1; j <= ysize; j++) {
         for ( uint i = 1; i <= xsize; i++)
         {
@@ -231,8 +232,7 @@ inline int update_plane ( const int periodic, // toggle for periodic-nonperiodic
         // we need to propagate only when we are alone row-wise or column-wise in the
         // grid of processors
 
-        #pragma omp single nowait
-        {
+        
             
         if ( N[_x_] == 1 ) {
             // propagate the boundaries as needed
@@ -252,7 +252,7 @@ inline int update_plane ( const int periodic, // toggle for periodic-nonperiodic
             }
         }
 
-        }
+        
     }
 
     #undef IDX
@@ -288,6 +288,7 @@ inline int get_total_energy( plane_t *plane,
     //       (ii) ask the compiler to do it
     // for instance
     // #pragma GCC unroll 4
+    #pragma omp parallel for reduction(+:totenergy) schedule(static)
     for ( int j = 1; j <= ysize; j++ ) {
         for ( int i = 1; i <= xsize; i++ ) {
             totenergy += data[ IDX(i, j) ];
