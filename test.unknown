@@ -6,7 +6,7 @@
 #SBATCH --mem=0                     # use all available memory
 #SBATCH --partition=EPYC
 
-#SBATCH -t 00:00:20                 # 5 minutes for profiling and test runs
+#SBATCH -t 00:03:00                 # 5 minutes for profiling and test runs
 #SBATCH --job-name=testing
 
 # Set OpenMP variables
@@ -19,4 +19,4 @@ export OMP_DISPLAY_AFFINITY=TRUE
 module load openMPI/5.0.5
 
 mpicc -O3 -std=c17 -fopenmp -march=native  -Iinclude   src/stencil_template_parallel.c   -o stencil_template_parallel
-mpirun -np 1 --map-by core --bind-to core ./stencil_template_parallel -x 256 -y 256 -n 100 -e 20 -p 1 -v 1 > output.log
+mpirun -np 1 --map-by core --bind-to core ./stencil_template_parallel -p 1 -v 0 -o 0 > output_base.log
