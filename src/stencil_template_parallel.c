@@ -136,13 +136,13 @@ int main(int argc, char **argv) {
       output_energy_stat( iter, &planes[!current], (iter+1) * Nsources*energy_per_source, Rank, &myCOMM_WORLD);
 
     // to create simulations
-    char filename[100];
-    sprintf( filename, "data_parallel/%d_plane_%05d.bin", Rank, iter );
-    int dump_status = dump(planes[!current].data, planes[!current].size, filename);
-    if (dump_status != 0)
-    {
-      fprintf(stderr, "Error in dump_status. Exit with %d\n", dump_status);
-    }
+    // char filename[100];
+    // sprintf( filename, "data_parallel/%d_plane_%05d.bin", Rank, iter );
+    // int dump_status = dump(planes[!current].data, planes[!current].size, filename);
+    // if (dump_status != 0)
+    // {
+    //   fprintf(stderr, "Error in dump_status. Exit with %d\n", dump_status);
+    // }
 
     /* swap plane indexes for the new iteration */
     current = !current; 
@@ -939,33 +939,33 @@ int output_energy_stat ( int step, plane_t *plane, double budget, int Me, MPI_Co
   return 0;
 }
 
-int dump ( const double *data, const uint size[2], const char *filename)
-{
-  if ( (filename != NULL) && (filename[0] != '\0') ){
-    FILE *outfile = fopen( filename, "w" );
-    if ( outfile == NULL )
-      return 2;
+// int dump ( const double *data, const uint size[2], const char *filename)
+// {
+//   if ( (filename != NULL) && (filename[0] != '\0') ){
+//     FILE *outfile = fopen( filename, "w" );
+//     if ( outfile == NULL )
+//       return 2;
     
-    float *array = (float*)malloc( size[0] * sizeof(float) );
+//     float *array = (float*)malloc( size[0] * sizeof(float) );
 
-    for ( int j = 1; j <= size[1]; j++ ) {      
-      const double * restrict line = data + j*(size[0] + 2);
-      for ( int i = 1; i <= size[0]; i++ ) {
-        //int cut = line[i] < 100;
-        array[i-1] = (float) line[i];
+//     for ( int j = 1; j <= size[1]; j++ ) {      
+//       const double * restrict line = data + j*(size[0] + 2);
+//       for ( int i = 1; i <= size[0]; i++ ) {
+//         //int cut = line[i] < 100;
+//         array[i-1] = (float) line[i];
         
-      }
-      //printf("\n");
-      fwrite( array, sizeof(float), size[0], outfile );
-    }
+//       }
+//       //printf("\n");
+//       fwrite( array, sizeof(float), size[0], outfile );
+//     }
 
-    free( array );
+//     free( array );
 
-    fclose( outfile );
-    return 0;
-  }
+//     fclose( outfile );
+//     return 0;
+//   }
 
-  return 1;
+//   return 1;
   
-}
+// }
 

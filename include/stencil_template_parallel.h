@@ -61,7 +61,7 @@ extern int update_plane ( const int      , // periodic or not
 extern int get_total_energy( plane_t *, // plane
                              double  * ); // energy
 
-extern int dump ( const double *data, const uint size[2], const char *filename);
+// extern int dump ( const double *data, const uint size[2], const char *filename);
 
 // function used to initialize everything (planes buffers, comm buffers etc.)
 int initialize ( MPI_Comm *,
@@ -207,8 +207,8 @@ inline int update_plane ( const int periodic, // toggle for periodic-nonperiodic
     double * restrict old = oldplane->data; // we will read from this
     double * restrict new = newplane->data; // and write on this
     
-    #pragma omp parallel for schedule(static)
-    //#pragma GCC unroll 4
+    // #pragma omp parallel for schedule(static)
+    #pragma GCC unroll 4
     for (uint j = 1; j <= ysize; j++) {
         for ( uint i = 1; i <= xsize; i++)
         {
@@ -231,8 +231,6 @@ inline int update_plane ( const int periodic, // toggle for periodic-nonperiodic
     if ( periodic ) {
         // we need to propagate only when we are alone row-wise or column-wise in the
         // grid of processors
-
-        
             
         if ( N[_x_] == 1 ) {
             // propagate the boundaries as needed
