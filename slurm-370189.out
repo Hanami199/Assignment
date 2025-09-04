@@ -1,8 +1,0 @@
---------------------------------------------------------------------------
-The specified map-by directive is not recognized:
-
-  Directive: none
-  Valid directives: slot:hwthread:core:l1cache:l2cache:l3cache:numa:package:node:seq:ppr:rankfile:pe-list=:likwid
-
-Please check for a typo or ensure that the directive is a supported one.
---------------------------------------------------------------------------
