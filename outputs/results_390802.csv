@@ -1,0 +1,7 @@
+timestamp,threads,elapsed_s,maxrss_kb
+20250906_195645,1,Command exited with non-zero status 2,Command exited with non-zero status 2
+20250906_195646,4,Command exited with non-zero status 2,Command exited with non-zero status 2
+20250906_195647,16,Command exited with non-zero status 2,Command exited with non-zero status 2
+20250906_195649,32,Command exited with non-zero status 2,Command exited with non-zero status 2
+20250906_195650,64,Command exited with non-zero status 2,Command exited with non-zero status 2
+20250906_195651,128,Command exited with non-zero status 2,Command exited with non-zero status 2
