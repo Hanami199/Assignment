@@ -24,7 +24,7 @@ mkdir -p outputs
 RESULTS="outputs/results_${SLURM_JOB_ID}.csv"
 echo "timestamp,threads,elapsed_s,maxrss_kb" > "$RESULTS"
 
-for nt in 1 4 16 32 64 128; do
+for nt in 1 2 4 8 16 32 64 128; do
   export OMP_NUM_THREADS=$nt
   echo "Running with $nt threads"
   ts=$(date +"%Y%m%d_%H%M%S")

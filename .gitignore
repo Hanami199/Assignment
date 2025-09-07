@@ -3,3 +3,4 @@ examples
 make_movies.py
 plot_parallel.py
 plot_threadsrankratio.py
+plot_results.py
