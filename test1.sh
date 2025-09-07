@@ -2,10 +2,10 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=128          
+#SBATCH --cpus-per-task=4          
 #SBATCH --hint=nomultithread
 #SBATCH --mem=0
-#SBATCH --partition=EPYC
+#SBATCH --partition=GENOA
 #SBATCH -t 00:10:00
 #SBATCH --job-name=HPC_Exam
 #SBATCH --exclusive                   
@@ -24,14 +24,14 @@ mkdir -p outputs
 RESULTS="outputs/results_${SLURM_JOB_ID}.csv"
 echo "timestamp,threads,elapsed_s,maxrss_kb" > "$RESULTS"
 
-for nt in 1 2 4 8 16 32 64 128; do
+for nt in 1 2 4; do
   export OMP_NUM_THREADS=$nt
   echo "Running with $nt threads"
   ts=$(date +"%Y%m%d_%H%M%S")
   log="outputs/output_${ts}_1Task_${nt}Threads.log"
   # time the step and append to CSV:
   /usr/bin/time -f "%e,%M" -o /tmp/time.$$ \
-    srun --ntasks=1 --cpus-per-task=$nt --cpu-bind=cores ./stencil_parallel -o 0 -v 1 > "$log"
+    srun --ntasks=1 --cpus-per-task=$nt --cpu-bind=cores ./stencil_parallel -e 300 -o 0 -v 1 > "$log"
   read elapsed_kb < /tmp/time.$$
   elapsed=${elapsed_kb%%,*}
   maxrss=${elapsed_kb##*,}
