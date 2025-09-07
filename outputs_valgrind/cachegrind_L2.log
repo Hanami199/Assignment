@@ -1,0 +1,28 @@
+==56653== Cachegrind, a high-precision tracing profiler
+==56653== Copyright (C) 2002-2024, and GNU GPL'd, by Nicholas Nethercote et al.
+==56653== Using Valgrind-3.24.0 and LibVEX; rerun with -h for copyright info
+==56653== Command: ./stencil_parallel -x 512 -y 512 -o 0 -v 0 -n 100
+==56653== Parent PID: 56635
+==56653== 
+--56653-- warning: L3 cache found, using its data for the LL simulation.
+==56653== WARNING: valgrind ignores shmget(shmflg) SHM_HUGETLB
+==56653== 
+==56653== I refs:        659,709,519
+==56653== I1  misses:        188,932
+==56653== LLi misses:         61,059
+==56653== I1  miss rate:        0.03%
+==56653== LLi miss rate:        0.01%
+==56653== 
+==56653== D refs:        213,141,746  (164,867,720 rd   + 48,274,026 wr)
+==56653== D1  misses:      8,085,172  (  4,477,985 rd   +  3,607,187 wr)
+==56653== LLd misses:      7,091,647  (  3,558,172 rd   +  3,533,475 wr)
+==56653== D1  miss rate:         3.8% (        2.7%     +        7.5%  )
+==56653== LLd miss rate:         3.3% (        2.2%     +        7.3%  )
+==56653== 
+==56653== LL refs:         8,274,104  (  4,666,917 rd   +  3,607,187 wr)
+==56653== LL misses:       7,152,706  (  3,619,231 rd   +  3,533,475 wr)
+==56653== LL miss rate:          0.8% (        0.4%     +        7.3%  )
+==56653== 
+==56653== Branches:       54,524,685  ( 52,610,259 cond +  1,914,426 ind)
+==56653== Mispredicts:       959,740  (    738,539 cond +    221,201 ind)
+==56653== Mispred rate:          1.8% (        1.4%     +       11.6%   )
