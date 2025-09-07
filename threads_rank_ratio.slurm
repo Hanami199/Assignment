@@ -6,7 +6,7 @@
 #SBATCH --mem=0                     # use all available memory
 #SBATCH --partition=EPYC
 
-#SBATCH -t 00:00:20                 # 5 minutes for profiling and test runs
+#SBATCH -t 00:05:00                 # 5 minutes for profiling and test runs
 #SBATCH --job-name=threads_rank_ratio
 
 # Set OpenMP variables
@@ -18,7 +18,7 @@ export OMP_DISPLAY_AFFINITY=TRUE
 # Load MPI module if needed
 module load openMPI/5.0.5
 
-mpicc -O3 -g -fno-omit-frame-pointer -fopenmp -march=native \
+mpicc -O3 -std=c17 -fopenmp -march=native \
       -Iinclude src/stencil_template_parallel.c -o stencil
 
 # --- discover core count on this node ---

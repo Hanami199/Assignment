@@ -6,18 +6,18 @@
 #SBATCH --hint=nomultithread
 #SBATCH --mem=0
 #SBATCH --partition=EPYC
-#SBATCH -t 00:05:00
+#SBATCH -t 00:10:00
 #SBATCH --job-name=HPC_Exam
 #SBATCH --exclusive                   
 
-module load openmpi/5.0.5 
+module load openMPI/5.0.5 
 
 # compile
 mpicc -march=native -O3 -std=c17 -fopenmp -Iinclude src/stencil_template_parallel.c -o stencil_parallel
 
 # affinity 
 export OMP_PLACES=cores
-export OMP_PROC_BIND=spread # try close later?
+export OMP_PROC_BIND=close # try close later?
 export OMP_DISPLAY_AFFINITY=TRUE
 
 mkdir -p outputs
