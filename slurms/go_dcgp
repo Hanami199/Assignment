@@ -1,11 +1,11 @@
-  
+#!/bin/sh  
 #SBATCH --nodes=1
-#SBATCH --cpus-per-task=128
+#SBATCH --cpus-per-task=32
 #SBATCH --ntasks-per-node=1
 #SBATCH --mem=0
 #SBATCH --partition dcgp_usr_prod
 #SBATCH -A uTS25_Tornator_0
-#SBATCH -t [00:30:00]
+#SBATCH -t 00:15:00
 #SBATCH --job-name=test
 ##SBATCH --exclusive
 # =======================================================
@@ -16,14 +16,14 @@ module load openmpi/4.1.6--gcc--12.2.0
 #export OMP_NUM_THREADS=
 export OMP_PLACES=cores
 export OMP_PROC_BIND=close
-
+export OMP_DISPLAY_AFFINITY=true
 
 mpicc -march=native -O3 -std=c17 -fopenmp -Iinclude src/stencil_template_parallel.c -o stencil_parallel
 mkdir -p outputs_leonardo
 RESULTS="outputs_leonardo/results_${SLURM_JOB_ID}.csv"
 echo "timestamp,threads,elapsed_s,maxrss_kb" > "$RESULTS"
 
-for nt in 1 2 4 8 16 32 64 128; do
+for nt in 1 2 4 8 16 32; do
   export OMP_NUM_THREADS=$nt
   echo "Running with $nt threads"
   ts=$(date +"%Y%m%d_%H%M%S")
