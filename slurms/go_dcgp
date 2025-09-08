@@ -8,9 +8,6 @@
 #SBATCH -t [00:30:00]
 #SBATCH --job-name=[your_choice]
 ##SBATCH --exclusive
-
-EXEC=[your_executable]
-
 # =======================================================
 
 module load openmpi/4.1.6--gcc--12.2.0
@@ -20,4 +17,25 @@ export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 export OMP_PLACES=[your_choice]
 export OMP_PROC_BIND=[your_choice]
 
-mpirun -np ${SLURM_NTASKS} ${EXEC} [your_arguments] > out   # rename the output file at your convenience
+
+mpicc -march=native -O3 -std=c17 -fopenmp -Iinclude src/stencil_template_parallel.c -o stencil_parallel
+mkdir -p outputs
+RESULTS="outputs/results_${SLURM_JOB_ID}.csv"
+echo "timestamp,threads,elapsed_s,maxrss_kb" > "$RESULTS"
+
+for nt in 1 2 4; do
+  export OMP_NUM_THREADS=$nt
+  echo "Running with $nt threads"
+  ts=$(date +"%Y%m%d_%H%M%S")
+  log="outputs/output_${ts}_1Task_${nt}Threads.log"
+  # time the step and append to CSV:
+  /usr/bin/time -f "%e,%M" -o /tmp/time.$$ \
+    srun --ntasks=1 --cpus-per-task=$nt --cpu-bind=cores ./stencil_parallel -e 300 -o 0 -v 1 > "$log"
+  read elapsed_kb < /tmp/time.$$
+  elapsed=${elapsed_kb%%,*}
+  maxrss=${elapsed_kb##*,}
+  echo "$ts,$nt,$elapsed,$maxrss" >> "$RESULTS"
+  rm -f /tmp/time.$$
+done
+
+echo "Done. Logs in outputs/, summary in $RESULTS"
