@@ -1,0 +1,12 @@
+Tasks are decomposed in a grid 1 x 1
+
+Task    0: 	grid coordinates :   0,   0
+	neighbours: N   -2    E   -2    S   -2    W   -2
+My (rank 0) patch size is 10000 x 10000
+Rank 0 signals initialization completed. Beginning computation part.
+Total execution time for rank 0: 104.212202
+Average comm waiting time and copy time (averaged across 1 ranks):
+ wait=0.000006s
+copy=0.000000s
+Total: wait=0.006022s, comm=0.000062s
+total injected energy is 300000, system energy is 298586 ( in avg 0.00298586 per grid point)
