@@ -969,3 +969,6 @@ int output_energy_stat ( int step, plane_t *plane, double budget, int Me, MPI_Co
   
 // }
 
+
+
+
