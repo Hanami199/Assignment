@@ -1,4 +1,4 @@
-#!/bin/bash
+g!/bin/bash
 #SBATCH --job-name=valgrind_stencil
 #SBATCH --partition=EPYC
 #SBATCH --nodes=1

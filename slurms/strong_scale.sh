@@ -2,7 +2,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=8
 #SBATCH --ntasks-per-node=8
-#SBATCH --cpus-per-task=128          
+#SBATCH --cpus-per-task=16          
 #SBATCH --hint=nomultithread
 #SBATCH --mem=0
 #SBATCH --partition=EPYC
