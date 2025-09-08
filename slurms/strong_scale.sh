@@ -1,9 +1,8 @@
 #!/bin/bash
-#SBATCH --nodes=1
-#SBATCH --ntasks=8
+#SBATCH --nodes=4
+#SBATCH --ntasks=32
 #SBATCH --ntasks-per-node=8
 #SBATCH --cpus-per-task=16          
-#SBATCH --hint=nomultithread
 #SBATCH --mem=0
 #SBATCH --partition=EPYC
 #SBATCH -t 00:15:00
@@ -24,19 +23,18 @@ mkdir -p outputs_strong_scale
 RESULTS="outputs_strong_scale/results_${SLURM_JOB_ID}.csv"
 echo "timestamp,threads,elapsed_s,maxrss_kb" > "$RESULTS"
 
-for nt in 16; do
-  export OMP_NUM_THREADS=$nt
-  echo "Running with $nt threads"
-  ts=$(date +"%Y%m%d_%H%M%S")
-  log="outputs_strong_scale/output_${ts}_1Task_${nt}Threads.log"
-  # time the step and append to CSV:
-  /usr/bin/time -f "%e,%M" -o /tmp/time.$$ \
-    srun --ntasks=8 --cpus-per-task=$nt --cpu-bind=cores ./stencil_parallel -o 0 -v 1 > "$log"
-  read elapsed_kb < /tmp/time.$$
-  elapsed=${elapsed_kb%%,*}
-  maxrss=${elapsed_kb##*,}
-  echo "$ts,$nt,$elapsed,$maxrss" >> "$RESULTS"
-  rm -f /tmp/time.$$
-done
+
+ export OMP_NUM_THREADS=16
+ echo "Running with 16 threads"
+ ts=$(date +"%Y%m%d_%H%M%S")
+ log="outputs_strong_scale/output_16_8Task_Threads.log"
+ # time the step and append to CSV:
+ /usr/bin/time -f "%e,%M" -o /tmp/time.$$ \
+    srun --ntasks=32 --cpus-per-task=16 --cpu-bind=cores ./stencil_parallel -x 15000 -y 15000 -o 0 -v 1 > "$log"
+ read elapsed_kb < /tmp/time.$$
+ elapsed=${elapsed_kb%%,*}
+ maxrss=${elapsed_kb##*,}
+ echo "$ts,$nt,$elapsed,$maxrss" >> "$RESULTS"
+ rm -f /tmp/time.$$
 
 echo "Done. Logs in outputs/, summary in $RESULTS"
