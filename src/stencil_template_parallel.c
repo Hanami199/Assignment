@@ -166,8 +166,8 @@ int main(int argc, char **argv) {
     double comm_mean_all = comm_sum_all/(Niterations * (double)P);
     double copy_mean_all = copy_sum_all/(Niterations * (double)P);
 
-    printf("Average comm waiting time and copy time (averaged across %d ranks):\n wait=%.6fs\ncopy=%.6fs\n",
-          P, comm_mean_all, copy_mean_all);
+    printf("Average comm waiting time and copy time (averaged across %d ranks):\n wait=%.6fs\ncopy=%.6fs\nTotal: wait=%.6fs, comm=%.6fs\n",
+          P, comm_mean_all, copy_mean_all, comm_sum, copy_sum);
   }
 
   output_energy_stat ( -1, &planes[!current], Niterations * Nsources*energy_per_source, Rank, &myCOMM_WORLD );
