@@ -1,0 +1,47 @@
+Tasks are decomposed in a grid 4 x 2
+
+Task    0: 	grid coordinates :   0,   0
+	neighbours: N   -2    E    1    S    4    W   -2
+My (rank 0) patch size is 6250 x 12500
+Task    1: 	grid coordinates :   1,   0
+	neighbours: N   -2    E    2    S    5    W    0
+My (rank 1) patch size is 6250 x 12500
+Task    2: 	grid coordinates :   2,   0
+	neighbours: N   -2    E    3    S    6    W    1
+My (rank 2) patch size is 6250 x 12500
+Task    3: 	grid coordinates :   3,   0
+	neighbours: N   -2    E   -2    S    7    W    2
+My (rank 3) patch size is 6250 x 12500
+Task    4: 	grid coordinates :   0,   1
+	neighbours: N    0    E    5    S   -2    W   -2
+My (rank 4) patch size is 6250 x 12500
+Task    5: 	grid coordinates :   1,   1
+	neighbours: N    1    E    6    S   -2    W    4
+My (rank 5) patch size is 6250 x 12500
+Task    6: 	grid coordinates :   2,   1
+	neighbours: N    2    E    7    S   -2    W    5
+My (rank 6) patch size is 6250 x 12500
+Task    7: 	grid coordinates :   3,   1
+	neighbours: N    3    E   -2    S   -2    W    6
+My (rank 7) patch size is 6250 x 12500
+Rank 6 signals initialization completed. Beginning computation part.
+Total execution time for rank 6: 31.814840
+Rank 0 signals initialization completed. Beginning computation part.
+Total execution time for rank 0: 31.814981
+Average comm waiting time and copy time (averaged across 8 ranks):
+ wait=0.001083s
+copy=0.000150s
+Total: wait=0.783012s, comm=0.128764s
+total injected energy is 300000, system energy is 299890 ( in avg 0.00383859 per grid point)
+Rank 1 signals initialization completed. Beginning computation part.
+Total execution time for rank 1: 31.813523
+Rank 2 signals initialization completed. Beginning computation part.
+Total execution time for rank 2: 31.812679
+Rank 4 signals initialization completed. Beginning computation part.
+Total execution time for rank 4: 31.817189
+Rank 5 signals initialization completed. Beginning computation part.
+Total execution time for rank 5: 31.815752
+Rank 7 signals initialization completed. Beginning computation part.
+Total execution time for rank 7: 31.814041
+Rank 3 signals initialization completed. Beginning computation part.
+Total execution time for rank 3: 31.811055

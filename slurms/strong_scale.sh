@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --nodes=4
-#SBATCH --ntasks=32
+#SBATCH --nodes=1
+#SBATCH --ntasks=8
 #SBATCH --ntasks-per-node=8
-#SBATCH --cpus-per-task=16          
+#SBATCH --cpus-per-task=14          
 #SBATCH --mem=0
 #SBATCH --partition=EPYC
 #SBATCH -t 00:15:00
@@ -19,15 +19,15 @@ export OMP_PLACES=cores
 export OMP_PROC_BIND=close # try close later?
 export OMP_DISPLAY_AFFINITY=TRUE
 
-mkdir -p outputs_strong_scale
-RESULTS="outputs_strong_scale/results_${SLURM_JOB_ID}.csv"
+mkdir -p outputs_strong_scale_leo
+RESULTS="outputs_strong_scale_leo/results_1_node.csv"
 echo "timestamp,threads,elapsed_s,maxrss_kb" > "$RESULTS"
 
 
- export OMP_NUM_THREADS=16
- echo "Running with 16 threads"
+ export OMP_NUM_THREADS=14
+ echo "Running with 14 threads"
  ts=$(date +"%Y%m%d_%H%M%S")
- log="outputs_strong_scale/output_16_8Task_Threads.log"
+ log="outputs_strong_scale_leo/output_14_8Task_1Node.log"
  # time the step and append to CSV:
  /usr/bin/time -f "%e,%M" -o /tmp/time.$$ \
     srun --ntasks=32 --cpus-per-task=16 --cpu-bind=cores ./stencil_parallel -x 15000 -y 15000 -o 0 -v 1 > "$log"

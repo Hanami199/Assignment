@@ -1,0 +1,647 @@
+Tasks are decomposed in a grid 16 x 8
+
+Task    8: 	grid coordinates :   8,   0
+	neighbours: N   -2    E    9    S   24    W    7
+My (rank 8) patch size is 1562 x 3125
+Task   16: 	grid coordinates :   0,   1
+	neighbours: N    0    E   17    S   32    W   -2
+My (rank 16) patch size is 1563 x 3125
+Task   24: 	grid coordinates :   8,   1
+	neighbours: N    8    E   25    S   40    W   23
+My (rank 24) patch size is 1562 x 3125
+Task   32: 	grid coordinates :   0,   2
+	neighbours: N   16    E   33    S   48    W   -2
+My (rank 32) patch size is 1563 x 3125
+Task   40: 	grid coordinates :   8,   2
+	neighbours: N   24    E   41    S   56    W   39
+My (rank 40) patch size is 1562 x 3125
+Task   48: 	grid coordinates :   0,   3
+	neighbours: N   32    E   49    S   64    W   -2
+My (rank 48) patch size is 1563 x 3125
+Task   56: 	grid coordinates :   8,   3
+	neighbours: N   40    E   57    S   72    W   55
+My (rank 56) patch size is 1562 x 3125
+Task   64: 	grid coordinates :   0,   4
+	neighbours: N   48    E   65    S   80    W   -2
+My (rank 64) patch size is 1563 x 3125
+Task   72: 	grid coordinates :   8,   4
+	neighbours: N   56    E   73    S   88    W   71
+My (rank 72) patch size is 1562 x 3125
+Task   80: 	grid coordinates :   0,   5
+	neighbours: N   64    E   81    S   96    W   -2
+My (rank 80) patch size is 1563 x 3125
+Task   88: 	grid coordinates :   8,   5
+	neighbours: N   72    E   89    S  104    W   87
+My (rank 88) patch size is 1562 x 3125
+Task   96: 	grid coordinates :   0,   6
+	neighbours: N   80    E   97    S  112    W   -2
+My (rank 96) patch size is 1563 x 3125
+Task  104: 	grid coordinates :   8,   6
+	neighbours: N   88    E  105    S  120    W  103
+My (rank 104) patch size is 1562 x 3125
+Task  112: 	grid coordinates :   0,   7
+	neighbours: N   96    E  113    S   -2    W   -2
+My (rank 112) patch size is 1563 x 3125
+Task  120: 	grid coordinates :   8,   7
+	neighbours: N  104    E  121    S   -2    W  119
+My (rank 120) patch size is 1562 x 3125
+Task   17: 	grid coordinates :   1,   1
+	neighbours: N    1    E   18    S   33    W   16
+My (rank 17) patch size is 1563 x 3125
+Task   18: 	grid coordinates :   2,   1
+	neighbours: N    2    E   19    S   34    W   17
+My (rank 18) patch size is 1563 x 3125
+Task   19: 	grid coordinates :   3,   1
+	neighbours: N    3    E   20    S   35    W   18
+My (rank 19) patch size is 1563 x 3125
+Task   20: 	grid coordinates :   4,   1
+	neighbours: N    4    E   21    S   36    W   19
+My (rank 20) patch size is 1563 x 3125
+Task   21: 	grid coordinates :   5,   1
+	neighbours: N    5    E   22    S   37    W   20
+My (rank 21) patch size is 1563 x 3125
+Task   81: 	grid coordinates :   1,   5
+	neighbours: N   65    E   82    S   97    W   80
+My (rank 81) patch size is 1563 x 3125
+Task   22: 	grid coordinates :   6,   1
+	neighbours: N    6    E   23    S   38    W   21
+My (rank 22) patch size is 1563 x 3125
+Task   82: 	grid coordinates :   2,   5
+	neighbours: N   66    E   83    S   98    W   81
+My (rank 82) patch size is 1563 x 3125
+Task   23: 	grid coordinates :   7,   1
+	neighbours: N    7    E   24    S   39    W   22
+My (rank 23) patch size is 1563 x 3125
+Task   83: 	grid coordinates :   3,   5
+	neighbours: N   67    E   84    S   99    W   82
+My (rank 83) patch size is 1563 x 3125
+Task   84: 	grid coordinates :   4,   5
+	neighbours: N   68    E   85    S  100    W   83
+My (rank 84) patch size is 1563 x 3125
+Task   85: 	grid coordinates :   5,   5
+	neighbours: N   69    E   86    S  101    W   84
+My (rank 85) patch size is 1563 x 3125
+Task   33: 	grid coordinates :   1,   2
+	neighbours: N   17    E   34    S   49    W   32
+My (rank 33) patch size is 1563 x 3125
+Task   86: 	grid coordinates :   6,   5
+	neighbours: N   70    E   87    S  102    W   85
+My (rank 86) patch size is 1563 x 3125
+Task   34: 	grid coordinates :   2,   2
+	neighbours: N   18    E   35    S   50    W   33
+My (rank 34) patch size is 1563 x 3125
+Task    9: 	grid coordinates :   9,   0
+	neighbours: N   -2    E   10    S   25    W    8
+My (rank 9) patch size is 1562 x 3125
+Task   87: 	grid coordinates :   7,   5
+	neighbours: N   71    E   88    S  103    W   86
+My (rank 87) patch size is 1563 x 3125
+Task   65: 	grid coordinates :   1,   4
+	neighbours: N   49    E   66    S   81    W   64
+My (rank 65) patch size is 1563 x 3125
+Task   35: 	grid coordinates :   3,   2
+	neighbours: N   19    E   36    S   51    W   34
+My (rank 35) patch size is 1563 x 3125
+Task   10: 	grid coordinates :  10,   0
+	neighbours: N   -2    E   11    S   26    W    9
+My (rank 10) patch size is 1562 x 3125
+Task   66: 	grid coordinates :   2,   4
+	neighbours: N   50    E   67    S   82    W   65
+My (rank 66) patch size is 1563 x 3125
+Task   36: 	grid coordinates :   4,   2
+	neighbours: N   20    E   37    S   52    W   35
+My (rank 36) patch size is 1563 x 3125
+Task   11: 	grid coordinates :  11,   0
+	neighbours: N   -2    E   12    S   27    W   10
+My (rank 11) patch size is 1562 x 3125
+Task   67: 	grid coordinates :   3,   4
+	neighbours: N   51    E   68    S   83    W   66
+My (rank 67) patch size is 1563 x 3125
+Task   37: 	grid coordinates :   5,   2
+	neighbours: N   21    E   38    S   53    W   36
+My (rank 37) patch size is 1563 x 3125
+Task   12: 	grid coordinates :  12,   0
+	neighbours: N   -2    E   13    S   28    W   11
+My (rank 12) patch size is 1562 x 3125
+Task   68: 	grid coordinates :   4,   4
+	neighbours: N   52    E   69    S   84    W   67
+My (rank 68) patch size is 1563 x 3125
+Task   38: 	grid coordinates :   6,   2
+	neighbours: N   22    E   39    S   54    W   37
+My (rank 38) patch size is 1563 x 3125
+Task   13: 	grid coordinates :  13,   0
+	neighbours: N   -2    E   14    S   29    W   12
+My (rank 13) patch size is 1562 x 3125
+Task   69: 	grid coordinates :   5,   4
+	neighbours: N   53    E   70    S   85    W   68
+My (rank 69) patch size is 1563 x 3125
+Task   39: 	grid coordinates :   7,   2
+	neighbours: N   23    E   40    S   55    W   38
+My (rank 39) patch size is 1563 x 3125
+Task   49: 	grid coordinates :   1,   3
+	neighbours: N   33    E   50    S   65    W   48
+My (rank 49) patch size is 1563 x 3125
+Task   14: 	grid coordinates :  14,   0
+	neighbours: N   -2    E   15    S   30    W   13
+My (rank 14) patch size is 1562 x 3125
+Task   70: 	grid coordinates :   6,   4
+	neighbours: N   54    E   71    S   86    W   69
+My (rank 70) patch size is 1563 x 3125
+Task   50: 	grid coordinates :   2,   3
+	neighbours: N   34    E   51    S   66    W   49
+My (rank 50) patch size is 1563 x 3125
+Task   15: 	grid coordinates :  15,   0
+	neighbours: N   -2    E   -2    S   31    W   14
+My (rank 15) patch size is 1562 x 3125
+Task   71: 	grid coordinates :   7,   4
+	neighbours: N   55    E   72    S   87    W   70
+My (rank 71) patch size is 1563 x 3125
+Task   51: 	grid coordinates :   3,   3
+	neighbours: N   35    E   52    S   67    W   50
+My (rank 51) patch size is 1563 x 3125
+Task   52: 	grid coordinates :   4,   3
+	neighbours: N   36    E   53    S   68    W   51
+My (rank 52) patch size is 1563 x 3125
+Task   25: 	grid coordinates :   9,   1
+	neighbours: N    9    E   26    S   41    W   24
+My (rank 25) patch size is 1562 x 3125
+Task   53: 	grid coordinates :   5,   3
+	neighbours: N   37    E   54    S   69    W   52
+My (rank 53) patch size is 1563 x 3125
+Task   26: 	grid coordinates :  10,   1
+	neighbours: N   10    E   27    S   42    W   25
+My (rank 26) patch size is 1562 x 3125
+Task   54: 	grid coordinates :   6,   3
+	neighbours: N   38    E   55    S   70    W   53
+My (rank 54) patch size is 1563 x 3125
+Task   27: 	grid coordinates :  11,   1
+	neighbours: N   11    E   28    S   43    W   26
+My (rank 27) patch size is 1562 x 3125
+Task   55: 	grid coordinates :   7,   3
+	neighbours: N   39    E   56    S   71    W   54
+My (rank 55) patch size is 1563 x 3125
+Task   28: 	grid coordinates :  12,   1
+	neighbours: N   12    E   29    S   44    W   27
+My (rank 28) patch size is 1562 x 3125
+Task   29: 	grid coordinates :  13,   1
+	neighbours: N   13    E   30    S   45    W   28
+My (rank 29) patch size is 1562 x 3125
+Task   30: 	grid coordinates :  14,   1
+	neighbours: N   14    E   31    S   46    W   29
+My (rank 30) patch size is 1562 x 3125
+Task   31: 	grid coordinates :  15,   1
+	neighbours: N   15    E   -2    S   47    W   30
+My (rank 31) patch size is 1562 x 3125
+Task  121: 	grid coordinates :   9,   7
+	neighbours: N  105    E  122    S   -2    W  120
+My (rank 121) patch size is 1562 x 3125
+Task   97: 	grid coordinates :   1,   6
+	neighbours: N   81    E   98    S  113    W   96
+My (rank 97) patch size is 1563 x 3125
+Task   89: 	grid coordinates :   9,   5
+	neighbours: N   73    E   90    S  105    W   88
+My (rank 89) patch size is 1562 x 3125
+Task  105: 	grid coordinates :   9,   6
+	neighbours: N   89    E  106    S  121    W  104
+My (rank 105) patch size is 1562 x 3125
+Task   57: 	grid coordinates :   9,   3
+	neighbours: N   41    E   58    S   73    W   56
+My (rank 57) patch size is 1562 x 3125
+Task   41: 	grid coordinates :   9,   2
+	neighbours: N   25    E   42    S   57    W   40
+My (rank 41) patch size is 1562 x 3125
+Task  113: 	grid coordinates :   1,   7
+	neighbours: N   97    E  114    S   -2    W  112
+My (rank 113) patch size is 1563 x 3125
+Task   73: 	grid coordinates :   9,   4
+	neighbours: N   57    E   74    S   89    W   72
+My (rank 73) patch size is 1562 x 3125
+Task  122: 	grid coordinates :  10,   7
+	neighbours: N  106    E  123    S   -2    W  121
+My (rank 122) patch size is 1562 x 3125
+Task   98: 	grid coordinates :   2,   6
+	neighbours: N   82    E   99    S  114    W   97
+My (rank 98) patch size is 1563 x 3125
+Task   90: 	grid coordinates :  10,   5
+	neighbours: N   74    E   91    S  106    W   89
+My (rank 90) patch size is 1562 x 3125
+Task  106: 	grid coordinates :  10,   6
+	neighbours: N   90    E  107    S  122    W  105
+My (rank 106) patch size is 1562 x 3125
+Task   58: 	grid coordinates :  10,   3
+	neighbours: N   42    E   59    S   74    W   57
+My (rank 58) patch size is 1562 x 3125
+Task   42: 	grid coordinates :  10,   2
+	neighbours: N   26    E   43    S   58    W   41
+My (rank 42) patch size is 1562 x 3125
+Task  114: 	grid coordinates :   2,   7
+	neighbours: N   98    E  115    S   -2    W  113
+My (rank 114) patch size is 1563 x 3125
+Task   74: 	grid coordinates :  10,   4
+	neighbours: N   58    E   75    S   90    W   73
+My (rank 74) patch size is 1562 x 3125
+Task  123: 	grid coordinates :  11,   7
+	neighbours: N  107    E  124    S   -2    W  122
+My (rank 123) patch size is 1562 x 3125
+Task   99: 	grid coordinates :   3,   6
+	neighbours: N   83    E  100    S  115    W   98
+My (rank 99) patch size is 1563 x 3125
+Task   91: 	grid coordinates :  11,   5
+	neighbours: N   75    E   92    S  107    W   90
+My (rank 91) patch size is 1562 x 3125
+Task  107: 	grid coordinates :  11,   6
+	neighbours: N   91    E  108    S  123    W  106
+My (rank 107) patch size is 1562 x 3125
+Task   59: 	grid coordinates :  11,   3
+	neighbours: N   43    E   60    S   75    W   58
+My (rank 59) patch size is 1562 x 3125
+Task   43: 	grid coordinates :  11,   2
+	neighbours: N   27    E   44    S   59    W   42
+My (rank 43) patch size is 1562 x 3125
+Task  115: 	grid coordinates :   3,   7
+	neighbours: N   99    E  116    S   -2    W  114
+My (rank 115) patch size is 1563 x 3125
+Task   75: 	grid coordinates :  11,   4
+	neighbours: N   59    E   76    S   91    W   74
+My (rank 75) patch size is 1562 x 3125
+Task  124: 	grid coordinates :  12,   7
+	neighbours: N  108    E  125    S   -2    W  123
+My (rank 124) patch size is 1562 x 3125
+Task  100: 	grid coordinates :   4,   6
+	neighbours: N   84    E  101    S  116    W   99
+My (rank 100) patch size is 1563 x 3125
+Task   92: 	grid coordinates :  12,   5
+	neighbours: N   76    E   93    S  108    W   91
+My (rank 92) patch size is 1562 x 3125
+Task  108: 	grid coordinates :  12,   6
+	neighbours: N   92    E  109    S  124    W  107
+My (rank 108) patch size is 1562 x 3125
+Task   60: 	grid coordinates :  12,   3
+	neighbours: N   44    E   61    S   76    W   59
+My (rank 60) patch size is 1562 x 3125
+Task   44: 	grid coordinates :  12,   2
+	neighbours: N   28    E   45    S   60    W   43
+My (rank 44) patch size is 1562 x 3125
+Task  116: 	grid coordinates :   4,   7
+	neighbours: N  100    E  117    S   -2    W  115
+My (rank 116) patch size is 1563 x 3125
+Task   76: 	grid coordinates :  12,   4
+	neighbours: N   60    E   77    S   92    W   75
+My (rank 76) patch size is 1562 x 3125
+Task  125: 	grid coordinates :  13,   7
+	neighbours: N  109    E  126    S   -2    W  124
+My (rank 125) patch size is 1562 x 3125
+Task  101: 	grid coordinates :   5,   6
+	neighbours: N   85    E  102    S  117    W  100
+My (rank 101) patch size is 1563 x 3125
+Task   93: 	grid coordinates :  13,   5
+	neighbours: N   77    E   94    S  109    W   92
+My (rank 93) patch size is 1562 x 3125
+Task  109: 	grid coordinates :  13,   6
+	neighbours: N   93    E  110    S  125    W  108
+My (rank 109) patch size is 1562 x 3125
+Task   61: 	grid coordinates :  13,   3
+	neighbours: N   45    E   62    S   77    W   60
+My (rank 61) patch size is 1562 x 3125
+Task   45: 	grid coordinates :  13,   2
+	neighbours: N   29    E   46    S   61    W   44
+My (rank 45) patch size is 1562 x 3125
+Task  117: 	grid coordinates :   5,   7
+	neighbours: N  101    E  118    S   -2    W  116
+My (rank 117) patch size is 1563 x 3125
+Task   77: 	grid coordinates :  13,   4
+	neighbours: N   61    E   78    S   93    W   76
+My (rank 77) patch size is 1562 x 3125
+Task  126: 	grid coordinates :  14,   7
+	neighbours: N  110    E  127    S   -2    W  125
+My (rank 126) patch size is 1562 x 3125
+Task  102: 	grid coordinates :   6,   6
+	neighbours: N   86    E  103    S  118    W  101
+My (rank 102) patch size is 1563 x 3125
+Task   94: 	grid coordinates :  14,   5
+	neighbours: N   78    E   95    S  110    W   93
+My (rank 94) patch size is 1562 x 3125
+Task  110: 	grid coordinates :  14,   6
+	neighbours: N   94    E  111    S  126    W  109
+My (rank 110) patch size is 1562 x 3125
+Task   62: 	grid coordinates :  14,   3
+	neighbours: N   46    E   63    S   78    W   61
+My (rank 62) patch size is 1562 x 3125
+Task   46: 	grid coordinates :  14,   2
+	neighbours: N   30    E   47    S   62    W   45
+My (rank 46) patch size is 1562 x 3125
+Task  118: 	grid coordinates :   6,   7
+	neighbours: N  102    E  119    S   -2    W  117
+My (rank 118) patch size is 1563 x 3125
+Task   78: 	grid coordinates :  14,   4
+	neighbours: N   62    E   79    S   94    W   77
+My (rank 78) patch size is 1562 x 3125
+Task  127: 	grid coordinates :  15,   7
+	neighbours: N  111    E   -2    S   -2    W  126
+My (rank 127) patch size is 1562 x 3125
+Task  103: 	grid coordinates :   7,   6
+	neighbours: N   87    E  104    S  119    W  102
+My (rank 103) patch size is 1563 x 3125
+Task   95: 	grid coordinates :  15,   5
+	neighbours: N   79    E   -2    S  111    W   94
+My (rank 95) patch size is 1562 x 3125
+Task  111: 	grid coordinates :  15,   6
+	neighbours: N   95    E   -2    S  127    W  110
+My (rank 111) patch size is 1562 x 3125
+Task   63: 	grid coordinates :  15,   3
+	neighbours: N   47    E   -2    S   79    W   62
+My (rank 63) patch size is 1562 x 3125
+Task   47: 	grid coordinates :  15,   2
+	neighbours: N   31    E   -2    S   63    W   46
+My (rank 47) patch size is 1562 x 3125
+Task  119: 	grid coordinates :   7,   7
+	neighbours: N  103    E  120    S   -2    W  118
+My (rank 119) patch size is 1563 x 3125
+Task   79: 	grid coordinates :  15,   4
+	neighbours: N   63    E   -2    S   95    W   78
+My (rank 79) patch size is 1562 x 3125
+Task    0: 	grid coordinates :   0,   0
+	neighbours: N   -2    E    1    S   16    W   -2
+My (rank 0) patch size is 1563 x 3125
+Task    1: 	grid coordinates :   1,   0
+	neighbours: N   -2    E    2    S   17    W    0
+My (rank 1) patch size is 1563 x 3125
+Task    2: 	grid coordinates :   2,   0
+	neighbours: N   -2    E    3    S   18    W    1
+My (rank 2) patch size is 1563 x 3125
+Task    3: 	grid coordinates :   3,   0
+	neighbours: N   -2    E    4    S   19    W    2
+My (rank 3) patch size is 1563 x 3125
+Task    4: 	grid coordinates :   4,   0
+	neighbours: N   -2    E    5    S   20    W    3
+My (rank 4) patch size is 1563 x 3125
+Task    5: 	grid coordinates :   5,   0
+	neighbours: N   -2    E    6    S   21    W    4
+My (rank 5) patch size is 1563 x 3125
+Task    6: 	grid coordinates :   6,   0
+	neighbours: N   -2    E    7    S   22    W    5
+My (rank 6) patch size is 1563 x 3125
+Task    7: 	grid coordinates :   7,   0
+	neighbours: N   -2    E    8    S   23    W    6
+My (rank 7) patch size is 1563 x 3125
+Rank 1 signals initialization completed. Beginning computation part.
+Total execution time for rank 1: 2.206074
+Rank 64 signals initialization completed. Beginning computation part.
+Total execution time for rank 64: 2.200820
+Rank 47 signals initialization completed. Beginning computation part.
+Total execution time for rank 47: 2.190266
+Rank 7 signals initialization completed. Beginning computation part.
+Total execution time for rank 7: 2.204572
+Rank 2 signals initialization completed. Beginning computation part.
+Total execution time for rank 2: 2.207730
+Rank 3 signals initialization completed. Beginning computation part.
+Total execution time for rank 3: 2.209843
+Rank 5 signals initialization completed. Beginning computation part.
+Total execution time for rank 5: 2.208602
+Rank 0 signals initialization completed. Beginning computation part.
+Total execution time for rank 0: 2.204521
+Average comm waiting time and copy time (averaged across 128 ranks):
+ wait=0.000599s
+copy=0.000026s
+Total: wait=0.729671s, comm=0.016800s
+total injected energy is 300000, system energy is 299020 ( in avg 0.0612197 per grid point)
+Rank 6 signals initialization completed. Beginning computation part.
+Total execution time for rank 6: 2.206737
+Rank 65 signals initialization completed. Beginning computation part.
+Total execution time for rank 65: 2.202134
+Rank 71 signals initialization completed. Beginning computation part.
+Total execution time for rank 71: 2.202470
+Rank 66 signals initialization completed. Beginning computation part.
+Total execution time for rank 66: 2.203734
+Rank 20 signals initialization completed. Beginning computation part.
+Total execution time for rank 20: 2.208145
+Rank 45 signals initialization completed. Beginning computation part.
+Total execution time for rank 45: 2.192925
+Rank 4 signals initialization completed. Beginning computation part.
+Total execution time for rank 4: 2.210341
+Rank 73 signals initialization completed. Beginning computation part.
+Total execution time for rank 73: 2.199143
+Rank 22 signals initialization completed. Beginning computation part.
+Total execution time for rank 22: 2.205869
+Rank 67 signals initialization completed. Beginning computation part.
+Total execution time for rank 67: 2.205513
+Rank 72 signals initialization completed. Beginning computation part.
+Total execution time for rank 72: 2.200388
+Rank 25 signals initialization completed. Beginning computation part.
+Total execution time for rank 25: 2.199998
+Rank 26 signals initialization completed. Beginning computation part.
+Total execution time for rank 26: 2.198318
+Rank 8 signals initialization completed. Beginning computation part.
+Total execution time for rank 8: 2.202870
+Rank 18 signals initialization completed. Beginning computation part.
+Total execution time for rank 18: 2.205560
+Rank 68 signals initialization completed. Beginning computation part.
+Total execution time for rank 68: 2.205730
+Rank 24 signals initialization completed. Beginning computation part.
+Total execution time for rank 24: 2.201792
+Rank 70 signals initialization completed. Beginning computation part.
+Total execution time for rank 70: 2.204722
+Rank 40 signals initialization completed. Beginning computation part.
+Total execution time for rank 40: 2.201056
+Rank 10 signals initialization completed. Beginning computation part.
+Total execution time for rank 10: 2.199334
+Rank 11 signals initialization completed. Beginning computation part.
+Total execution time for rank 11: 2.198295
+Rank 15 signals initialization completed. Beginning computation part.
+Total execution time for rank 15: 2.192811
+Rank 74 signals initialization completed. Beginning computation part.
+Total execution time for rank 74: 2.197129
+Rank 21 signals initialization completed. Beginning computation part.
+Total execution time for rank 21: 2.207132
+Rank 23 signals initialization completed. Beginning computation part.
+Total execution time for rank 23: 2.203877
+Rank 76 signals initialization completed. Beginning computation part.
+Total execution time for rank 76: 2.192772
+Rank 19 signals initialization completed. Beginning computation part.
+Total execution time for rank 19: 2.207578
+Rank 12 signals initialization completed. Beginning computation part.
+Total execution time for rank 12: 2.195819
+Rank 77 signals initialization completed. Beginning computation part.
+Total execution time for rank 77: 2.194140
+Rank 78 signals initialization completed. Beginning computation part.
+Total execution time for rank 78: 2.193431
+Rank 79 signals initialization completed. Beginning computation part.
+Total execution time for rank 79: 2.193139
+Rank 28 signals initialization completed. Beginning computation part.
+Total execution time for rank 28: 2.192907
+Rank 30 signals initialization completed. Beginning computation part.
+Total execution time for rank 30: 2.191637
+Rank 31 signals initialization completed. Beginning computation part.
+Total execution time for rank 31: 2.193524
+Rank 29 signals initialization completed. Beginning computation part.
+Total execution time for rank 29: 2.192386
+Rank 17 signals initialization completed. Beginning computation part.
+Total execution time for rank 17: 2.204943
+Rank 42 signals initialization completed. Beginning computation part.
+Total execution time for rank 42: 2.198539
+Rank 33 signals initialization completed. Beginning computation part.
+Total execution time for rank 33: 2.203884
+Rank 43 signals initialization completed. Beginning computation part.
+Total execution time for rank 43: 2.196882
+Rank 41 signals initialization completed. Beginning computation part.
+Total execution time for rank 41: 2.199488
+Rank 69 signals initialization completed. Beginning computation part.
+Total execution time for rank 69: 2.204868
+Rank 46 signals initialization completed. Beginning computation part.
+Total execution time for rank 46: 2.190725
+Rank 101 signals initialization completed. Beginning computation part.
+Total execution time for rank 101: 2.200406
+Rank 84 signals initialization completed. Beginning computation part.
+Total execution time for rank 84: 2.202954
+Rank 89 signals initialization completed. Beginning computation part.
+Total execution time for rank 89: 2.196623
+Rank 90 signals initialization completed. Beginning computation part.
+Total execution time for rank 90: 2.195802
+Rank 98 signals initialization completed. Beginning computation part.
+Total execution time for rank 98: 2.198919
+Rank 9 signals initialization completed. Beginning computation part.
+Total execution time for rank 9: 2.201025
+Rank 80 signals initialization completed. Beginning computation part.
+Total execution time for rank 80: 2.197239
+Rank 81 signals initialization completed. Beginning computation part.
+Total execution time for rank 81: 2.198758
+Rank 83 signals initialization completed. Beginning computation part.
+Total execution time for rank 83: 2.202231
+Rank 85 signals initialization completed. Beginning computation part.
+Total execution time for rank 85: 2.201713
+Rank 86 signals initialization completed. Beginning computation part.
+Total execution time for rank 86: 2.201153
+Rank 87 signals initialization completed. Beginning computation part.
+Total execution time for rank 87: 2.200195
+Rank 13 signals initialization completed. Beginning computation part.
+Total execution time for rank 13: 2.194388
+Rank 16 signals initialization completed. Beginning computation part.
+Total execution time for rank 16: 2.203267
+Rank 91 signals initialization completed. Beginning computation part.
+Total execution time for rank 91: 2.193902
+Rank 93 signals initialization completed. Beginning computation part.
+Total execution time for rank 93: 2.193621
+Rank 50 signals initialization completed. Beginning computation part.
+Total execution time for rank 50: 2.201814
+Rank 95 signals initialization completed. Beginning computation part.
+Total execution time for rank 95: 2.194279
+Rank 52 signals initialization completed. Beginning computation part.
+Total execution time for rank 52: 2.203983
+Rank 53 signals initialization completed. Beginning computation part.
+Total execution time for rank 53: 2.202947
+Rank 54 signals initialization completed. Beginning computation part.
+Total execution time for rank 54: 2.201582
+Rank 96 signals initialization completed. Beginning computation part.
+Total execution time for rank 96: 2.194999
+Rank 75 signals initialization completed. Beginning computation part.
+Total execution time for rank 75: 2.194869
+Rank 44 signals initialization completed. Beginning computation part.
+Total execution time for rank 44: 2.193602
+Rank 48 signals initialization completed. Beginning computation part.
+Total execution time for rank 48: 2.199593
+Rank 49 signals initialization completed. Beginning computation part.
+Total execution time for rank 49: 2.199745
+Rank 55 signals initialization completed. Beginning computation part.
+Total execution time for rank 55: 2.199720
+Rank 32 signals initialization completed. Beginning computation part.
+Total execution time for rank 32: 2.202760
+Rank 116 signals initialization completed. Beginning computation part.
+Total execution time for rank 116: 2.197785
+Rank 34 signals initialization completed. Beginning computation part.
+Total execution time for rank 34: 2.204050
+Rank 56 signals initialization completed. Beginning computation part.
+Total execution time for rank 56: 2.197533
+Rank 57 signals initialization completed. Beginning computation part.
+Total execution time for rank 57: 2.195922
+Rank 59 signals initialization completed. Beginning computation part.
+Total execution time for rank 59: 2.193539
+Rank 60 signals initialization completed. Beginning computation part.
+Total execution time for rank 60: 2.190859
+Rank 61 signals initialization completed. Beginning computation part.
+Total execution time for rank 61: 2.189794
+Rank 63 signals initialization completed. Beginning computation part.
+Total execution time for rank 63: 2.193615
+Rank 62 signals initialization completed. Beginning computation part.
+Total execution time for rank 62: 2.188318
+Rank 124 signals initialization completed. Beginning computation part.
+Total execution time for rank 124: 2.188051
+Rank 117 signals initialization completed. Beginning computation part.
+Total execution time for rank 117: 2.197217
+Rank 118 signals initialization completed. Beginning computation part.
+Total execution time for rank 118: 2.197014
+Rank 119 signals initialization completed. Beginning computation part.
+Total execution time for rank 119: 2.195223
+Rank 112 signals initialization completed. Beginning computation part.
+Total execution time for rank 112: 2.193512
+Rank 113 signals initialization completed. Beginning computation part.
+Total execution time for rank 113: 2.194772
+Rank 114 signals initialization completed. Beginning computation part.
+Total execution time for rank 114: 2.195316
+Rank 125 signals initialization completed. Beginning computation part.
+Total execution time for rank 125: 2.189402
+Rank 127 signals initialization completed. Beginning computation part.
+Total execution time for rank 127: 2.193250
+Rank 97 signals initialization completed. Beginning computation part.
+Total execution time for rank 97: 2.196798
+Rank 100 signals initialization completed. Beginning computation part.
+Total execution time for rank 100: 2.201375
+Rank 102 signals initialization completed. Beginning computation part.
+Total execution time for rank 102: 2.199585
+Rank 103 signals initialization completed. Beginning computation part.
+Total execution time for rank 103: 2.198111
+Rank 120 signals initialization completed. Beginning computation part.
+Total execution time for rank 120: 2.192980
+Rank 126 signals initialization completed. Beginning computation part.
+Total execution time for rank 126: 2.188018
+Rank 94 signals initialization completed. Beginning computation part.
+Total execution time for rank 94: 2.192490
+Rank 92 signals initialization completed. Beginning computation part.
+Total execution time for rank 92: 2.192005
+Rank 35 signals initialization completed. Beginning computation part.
+Total execution time for rank 35: 2.205957
+Rank 82 signals initialization completed. Beginning computation part.
+Total execution time for rank 82: 2.200328
+Rank 14 signals initialization completed. Beginning computation part.
+Total execution time for rank 14: 2.193284
+Rank 37 signals initialization completed. Beginning computation part.
+Total execution time for rank 37: 2.205933
+Rank 38 signals initialization completed. Beginning computation part.
+Total execution time for rank 38: 2.204450
+Rank 39 signals initialization completed. Beginning computation part.
+Total execution time for rank 39: 2.202843
+Rank 27 signals initialization completed. Beginning computation part.
+Total execution time for rank 27: 2.196235
+Rank 104 signals initialization completed. Beginning computation part.
+Total execution time for rank 104: 2.195694
+Rank 122 signals initialization completed. Beginning computation part.
+Total execution time for rank 122: 2.190934
+Rank 123 signals initialization completed. Beginning computation part.
+Total execution time for rank 123: 2.189472
+Rank 105 signals initialization completed. Beginning computation part.
+Total execution time for rank 105: 2.195945
+Rank 106 signals initialization completed. Beginning computation part.
+Total execution time for rank 106: 2.194455
+Rank 107 signals initialization completed. Beginning computation part.
+Total execution time for rank 107: 2.192906
+Rank 108 signals initialization completed. Beginning computation part.
+Total execution time for rank 108: 2.190347
+Rank 110 signals initialization completed. Beginning computation part.
+Total execution time for rank 110: 2.191023
+Rank 111 signals initialization completed. Beginning computation part.
+Total execution time for rank 111: 2.190887
+Rank 88 signals initialization completed. Beginning computation part.
+Total execution time for rank 88: 2.197757
+Rank 58 signals initialization completed. Beginning computation part.
+Total execution time for rank 58: 2.195344
+Rank 36 signals initialization completed. Beginning computation part.
+Total execution time for rank 36: 2.206370
+Rank 115 signals initialization completed. Beginning computation part.
+Total execution time for rank 115: 2.197565
+Rank 51 signals initialization completed. Beginning computation part.
+Total execution time for rank 51: 2.203736
+Rank 121 signals initialization completed. Beginning computation part.
+Total execution time for rank 121: 2.192534
+Rank 99 signals initialization completed. Beginning computation part.
+Total execution time for rank 99: 2.201005
+Rank 109 signals initialization completed. Beginning computation part.
+Total execution time for rank 109: 2.192405
