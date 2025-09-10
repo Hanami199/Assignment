@@ -86,11 +86,14 @@ int main(int argc, char **argv) {
 
   /* ----------- 2. COMMUNICATION & COMPUTATION PART ---------------- */
 
-  int current = OLD;  // set the buffer at "read" -> read from planes[OLD], write on NEW
-  double t1 = MPI_Wtime();   /* take wall-clock time */
-  double comm_sum = 0.0; // this will use to compute mean comm waiting time
-  double copy_sum      = 0.0; // this for copy wait time
-  int dump_every = 5;
+  int current = OLD;
+  double t_pack=0.0, t_wait=0.0, t_unpack=0.0, t_inject=0.0, t_compute=0.0;
+  int warmup = 0;
+  int M = Niterations - warmup;
+
+  /* --- sync start & start wall timer --- */
+  MPI_Barrier(myCOMM_WORLD);
+  double t_loop0 = MPI_Wtime();
 
   // to be reapeated for Niterations times:
   for (int iter = 0; iter < Niterations; ++iter) { 
@@ -99,37 +102,40 @@ int main(int argc, char **argv) {
     // it's 8 because we will have 4 receives and 4 sends
     // 0=N-se, 1=S-se, 2=E-se, 3=W-se, 4=N-re, 5=S-re, 6=E-re, 7=W-re
 
-    int flag = 0; // 8 flags for SEND/RECV
-
     // we initialize all reqs to MPI_REQUEST_NULL
     for (int k = 0; k < 8; ++k) reqs[k] = MPI_REQUEST_NULL;
     
     /* we inject new energy from sources */
-    double t0 = MPI_Wtime();
-    inject_energy( periodic, Nsources_local, Sources_local, energy_per_source, &planes[current], N );
+    double ti0 = MPI_Wtime();
+  inject_energy(periodic, Nsources_local, Sources_local, energy_per_source, &planes[current], N);
+  double ti1 = MPI_Wtime();
 
+  /* pack + post */
+  double tA = MPI_Wtime();
+  fill_buffers(buffers, &planes[current], periodic, N);
+  post_MPI_reqs(reqs, buffers, &planes[current], neighbours, myCOMM_WORLD);
+  double tB = MPI_Wtime();
 
-    /* ------------ COMMUNICATIONS & COMPUTATIONS -------------------------- */
+  /* wait */
+  MPI_Waitall(8, reqs, MPI_STATUSES_IGNORE);
+  double tC = MPI_Wtime();
 
-    // [A] fill the buffers, and/or make the buffers' pointers pointing to the correct position
-    fill_buffers(buffers, &planes[current], periodic, N);
+  /* unpack */
+  copy_halos(buffers, &planes[current], neighbours, periodic, N);
+  double tD = MPI_Wtime();
 
-    // We initialize Isend, Irecv (since before #pragma omp parallel we only have the master thread)
-    post_MPI_reqs(reqs, buffers, &planes[current], neighbours, myCOMM_WORLD);
+  /* compute (whole sweep) */
+  double tc0 = MPI_Wtime();
+  update_plane(periodic, N, &planes[current], &planes[!current]);
+  double tc1 = MPI_Wtime();
 
-    // wait for comms to
-    MPI_Waitall(8, reqs, MPI_STATUSES_IGNORE);
-
-    double t1 = MPI_Wtime();
-    copy_halos(buffers, &planes[current], neighbours, periodic, N);
-    double t2 = MPI_Wtime();
-
-    // only master writes these 
-    comm_sum += t1 - t0;
-    copy_sum += t2 - t1;
-
-    
-    update_plane(periodic, N, &planes[current], &planes[!current]);
+  if (iter >= warmup) {
+    t_inject += (ti1 - ti0);
+    t_pack   += (tB  - tA);
+    t_wait   += (tC  - tB);
+    t_unpack += (tD  - tC);
+    t_compute+= (tc1 - tc0);
+  }
 
     /* output if needed */
     if ( output_energy_stat_perstep )
@@ -149,25 +155,41 @@ int main(int argc, char **argv) {
   }
   
   // after all the comms-computes
-  t1 = MPI_Wtime() - t1;
-  printf("Total execution time for rank %d: %f\n", Rank, t1);
+  // t1 = MPI_Wtime() - t1;
+  // printf("Total execution time for rank %d: %f\n", Rank, t1);
 
   // compute mean waiting comm time and copy time
-  double comm_mean = comm_sum/(double)Niterations;
-  double copy_mean = copy_sum/(double)Niterations;
+  MPI_Barrier(myCOMM_WORLD);                      // end of measured region
 
-  // make a global mean 
-  double comm_sum_all = 0.0, copy_sum_all = 0.0;
-  MPI_Reduce(&comm_sum, &comm_sum_all, 1, MPI_DOUBLE, MPI_SUM, 0, myCOMM_WORLD);
-  MPI_Reduce(&copy_sum, &copy_sum_all, 1, MPI_DOUBLE, MPI_SUM, 0, myCOMM_WORLD);
+  double my_total = MPI_Wtime() - t_loop0;
+  double denom    = (M > 0 ? (double)M : 1.0);
+
+  double ps_total   = my_total     / denom;       // per-step (rank 0’s own)
+  double ps_inject  = t_inject     / denom;
+  double ps_pack    = t_pack       / denom;
+  double ps_wait    = t_wait       / denom;
+  double ps_unpack  = t_unpack     / denom;
+  double ps_comm    = ps_pack + ps_wait + ps_unpack;
+  double ps_compute = t_compute    / denom;
+  double ps_other   = ps_total - (ps_inject + ps_comm + ps_compute);  // may be ~0 ± rounding
 
   if (Rank == 0) {
-    int P; MPI_Comm_size(myCOMM_WORLD, &P);
-    double comm_mean_all = comm_sum_all/(Niterations * (double)P);
-    double copy_mean_all = copy_sum_all/(Niterations * (double)P);
+      int P; MPI_Comm_size(myCOMM_WORLD, &P);
+      /* one easy-to-scrape line */
+      printf("WEAK rank=0 ranks=%d total =%.6fperstep=%.6f "
+            "comm=%.6f (pack=%.6f wait=%.6f unpack=%.6f) "
+            "compute=%.6f inject=%.6f other=%.6f\n",
+            P, my_total ,ps_total, ps_comm, ps_pack, ps_wait, ps_unpack,
+            ps_compute, ps_inject, ps_other);
 
-    printf("Average comm waiting time and copy time (averaged across %d ranks):\n wait=%.6fs\ncopy=%.6fs\nTotal: wait=%.6fs, comm=%.6fs\n",
-          P, comm_mean_all, copy_mean_all, comm_sum, copy_sum);
+      /* percentages (optional) */
+      if (ps_total > 0.0) {
+          printf("WEAK_PCT comm=%.1f%% compute=%.1f%% inject=%.1f%% other=%.1f%%\n",
+                100.0*ps_comm/ps_total,
+                100.0*ps_compute/ps_total,
+                100.0*ps_inject/ps_total,
+                100.0*ps_other/ps_total);
+      }
   }
 
   output_energy_stat ( -1, &planes[!current], Niterations * Nsources*energy_per_source, Rank, &myCOMM_WORLD );
