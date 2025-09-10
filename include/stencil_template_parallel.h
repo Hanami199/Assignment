@@ -126,55 +126,30 @@ inline int inject_energy( const int      periodic, // if the boundary is periodi
     #define IDX( i, j ) ( (j)*sizex + (i) )
 
     // for every source of this rank
-    for (int s = 0; s < Nsources; s++) {
+    const int nx = plane->size[_x_];
+    const int ny = plane->size[_y_];
+    const int wrap_x = periodic && (N[_x_] == 1);
+    const int wrap_y = periodic && (N[_y_] == 1);
 
-            // extract the source position on the grid
-            int x = Sources[s][_x_];
-            int y = Sources[s][_y_];
-            
-            // add energy at that point
-            data[ IDX(x,y) ] += energy;
-            
-            // if there is only one MPI rank along that axis, we need to wrap locally
-            if ( periodic ) {
-                if ( (N[_x_] == 1)  ) {
-                    // propagate the boundaries if needed
-                    // check the serial version
+    // loop over sources
+    for (int s = 0; s < Nsources; ++s) {
+        const int x = Sources[s][_x_];
+        const int y = Sources[s][_y_];
 
-                    /* if N[_x_]==1, it means that we don't have a west or east neighbour
-                        so we need to add for the sources: 
-                    - if it's on the west edge, propagate also on the east halo
-                    - if it's on the east edge, propagate also on the west halo
-                    */
+        // always add to the interior point
+        data[ IDX(x, y) ] += energy;
 
-                    if ( x == 1 ){ // source on easr edge case
-                        data[IDX(plane->size[_x_]+1, y)] += energy;} // propagate on west halo
-
-                    if ( x == plane->size[_x_] ) { // source on west edge case
-                        data[IDX(0, y)] += energy;} // propagate on east halo
-                }
-                
-                if ( (N[_y_] == 1) )
-                    {
-                    // propagate the boundaries if needed
-                    // check the serial version
-
-                    /*same thing if we don't have north and south neighbour:
-                    - source on north edge has to be propagated on south halo
-                    - source on south edge has to be propagate on north halo
-                    */
-
-                    if ( y == 1 ){ // source on easr edge case
-                        data[IDX(x, plane->size[_y_]+1)] += energy;
-                    } // propagate on west halo
-
-                    if ( y == plane->size[_y_] ) { // source on west edge case
-                        data[IDX(x, 0)] += energy;
-                    } // propagate on east halo
-
-                }
-            }                
+        // only do halo propagation when needed
+        if (wrap_x) {
+            // note: keep as two independent if's in case nx==1 (both can be true)
+            if (x == 1)  data[ IDX(nx + 1, y) ] += energy; // east interior mirrors to west halo
+            if (x == nx) data[ IDX(0,y) ] += energy; // west interior mirrors to east halo
         }
+        if (wrap_y) {
+            if (y == 1) data[ IDX(x, ny + 1) ] += energy; // north interior -> south halo
+            if (y == ny)  data[ IDX(x, 0)] += energy; // south interior -> north halo
+        }
+    }
     #undef IDX
     return 0;
 }
@@ -194,15 +169,6 @@ inline int update_plane ( const int periodic, // toggle for periodic-nonperiodic
     uint register ysize = oldplane->size[_y_];
     
     #define IDX( i, j ) ( (j)*fxsize + (i) ) // preprocessor macro to access flattened array
-    
-    // HINT: you may attempt to
-    //       (i)  manually unroll the loop
-    //       (ii) ask the compiler to do it
-    // for instance
-    // #pragma GCC unroll 4
-    //
-    // HINT: in any case, this loop is a good candidate
-    //       for openmp parallelization
 
     double * restrict old = oldplane->data; // we will read from this
     double * restrict new = newplane->data; // and write on this
@@ -211,18 +177,8 @@ inline int update_plane ( const int periodic, // toggle for periodic-nonperiodic
     for (uint j = 1; j <= ysize; j++) {
         for ( uint i = 1; i <= xsize; i++)
         {
-            // NOTE: (i-1,j), (i+1,j), (i,j-1) and (i,j+1) always exist even
-            //       if this patch is at some border without periodic conditions;
-            //       in that case it is assumed that the +-1 points are outside the
-            //       plate and always have a value of 0, i.e. they are an
-            //       "infinite sink" of heat
-            
-            // five-points stencil formula
-            //
-            // HINT : check the serial version for some optimization
-            //
-            new[ IDX(i,j) ] = old[ IDX(i,j) ] / 2.0 + ( old[IDX(i-1, j)] + old[IDX(i+1, j)] +
-                                old[IDX(i, j-1)] + old[IDX(i, j+1)] ) /4.0 / 2.0;
+            new[ IDX(i,j) ] = old[ IDX(i,j) ] * 0.5 + ( old[IDX(i-1, j)] + old[IDX(i+1, j)] +
+                                old[IDX(i, j-1)] + old[IDX(i, j+1)] ) * 0.125;
             
         }
     }
