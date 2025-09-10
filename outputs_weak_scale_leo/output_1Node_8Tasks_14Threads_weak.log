@@ -1,0 +1,37 @@
+Tasks are decomposed in a grid 4 x 2
+
+Task    0: 	grid coordinates :   0,   0
+	neighbours: N   -2    E    1    S    4    W   -2
+My (rank 0) patch size is 5000 x 10000
+Task    1: 	grid coordinates :   1,   0
+	neighbours: N   -2    E    2    S    5    W    0
+My (rank 1) patch size is 5000 x 10000
+Task    2: 	grid coordinates :   2,   0
+	neighbours: N   -2    E    3    S    6    W    1
+My (rank 2) patch size is 5000 x 10000
+Task    3: 	grid coordinates :   3,   0
+	neighbours: N   -2    E   -2    S    7    W    2
+My (rank 3) patch size is 5000 x 10000
+Task    4: 	grid coordinates :   0,   1
+	neighbours: N    0    E    5    S   -2    W   -2
+My (rank 4) patch size is 5000 x 10000
+Task    5: 	grid coordinates :   1,   1
+	neighbours: N    1    E    6    S   -2    W    4
+My (rank 5) patch size is 5000 x 10000
+Task    6: 	grid coordinates :   2,   1
+	neighbours: N    2    E    7    S   -2    W    5
+My (rank 6) patch size is 5000 x 10000
+Task    7: 	grid coordinates :   3,   1
+	neighbours: N    3    E   -2    S   -2    W    6
+My (rank 7) patch size is 5000 x 10000
+Rank 1 signals initialization completed. Beginning computation part.
+Rank 2 signals initialization completed. Beginning computation part.
+Rank 7 signals initialization completed. Beginning computation part.
+Rank 4 signals initialization completed. Beginning computation part.
+Rank 6 signals initialization completed. Beginning computation part.
+Rank 3 signals initialization completed. Beginning computation part.
+Rank 0 signals initialization completed. Beginning computation part.
+WEAK rank=0 ranks=8 total =18.619903perstep=0.018620 comm=0.000507 (pack=0.000148 wait=0.000280 unpack=0.000079) compute=0.018111 inject=0.000000 other=0.000002
+WEAK_PCT comm=2.7% compute=97.3% inject=0.0% other=0.0%
+total injected energy is 4000, system energy is 4000 ( in avg 8e-05 per grid point)
+Rank 5 signals initialization completed. Beginning computation part.

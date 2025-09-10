@@ -1,6 +1,6 @@
 #!/bin/sh  
-#SBATCH --nodes=2
-#SBATCH --tasks=16
+#SBATCH --nodes=1
+#SBATCH --tasks=8
 #SBATCH --cpus-per-task=14
 #SBATCH --ntasks-per-node=8
 #SBATCH --mem=0
@@ -21,16 +21,16 @@ export OMP_DISPLAY_AFFINITY=true
 
 mpicc -march=native -O3 -std=c17 -fopenmp -Iinclude src/stencil_template_parallel.c -o stencil_parallel
 mkdir -p outputs_leonardo
-RESULTS="outputs_leonardo/results_16Node_128Tasks_14Threads_weak.csv"
+RESULTS="outputs_leonardo/test.csv"
 echo "timestamp,threads,elapsed_s,maxrss_kb" > "$RESULTS"
 
   export OMP_NUM_THREADS=14
   echo "Running with $nt threads"
   ts=$(date +"%Y%m%d_%H%M%S")
-  log="outputs_leonardo/output_2Node_16Task_14Threads_weak.log"
+  log="outputs_leonardo/test.log"
   # time the step and append to CSV:
   /usr/bin/time -f "%e,%M" -o /tmp/time.$$ \
-    srun --ntasks=128 --cpus-per-task=14 --cpu-bind=cores ./stencil_parallel -x 14142 -y 14142 -e 300 -o 0 -v 1 > "$log"
+    srun --ntasks=8 --cpus-per-task=14 --cpu-bind=cores ./stencil_parallel -e 300 -o 0 -v 1 > "$log"
   read elapsed_kb < /tmp/time.$$
   elapsed=${elapsed_kb%%,*}
   maxrss=${elapsed_kb##*,}
