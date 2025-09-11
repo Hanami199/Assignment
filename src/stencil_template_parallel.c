@@ -234,18 +234,22 @@ int fill_buffers(buffers_t *buffers,
     buffers[RECV][NORTH] = &plane->data[IDX(1,ny+1)];  // north starts from position (1,1) (since we also have the halos in data)
     buffers[RECV][SOUTH] = &plane->data[IDX(1,0)]; 
   }
-
+  #pragma omp parallel 
+  {
   // west column (all the values on the left side, so where x=1 and for y=1,...,ny)
   if (buffers[SEND][WEST]) {
+    #pragma omp for schedule(static)
     for (uint j = 0; j < ny; j++)
       buffers[SEND][WEST][j] = plane->data[IDX(1, j+1)];
   }
 
   // east column (all the values on the right side, so where x=nx and for y=1,...,ny)
   if (buffers[SEND][EAST]) {
+    #pragma omp for schedule(static)
     for (uint j = 0; j < ny; j++)
       buffers[SEND][EAST][j] = plane->data[IDX(nx, j+1)];
   }
+}
 
   #undef IDX
   return 0;
@@ -293,33 +297,40 @@ int copy_halos(buffers_t *buffers,
   const size_t fx = (size_t)nx + 2;
 
   #define IDX(i,j) ((j)*fx + (i))
-
+#pragma omp parallel
+{
   if (neigh[WEST] != MPI_PROC_NULL) {
-  for (uint j=0; j<ny; j++){
-    plane->data[IDX(0, j+1)] = buffers[RECV][WEST][j];
+  #pragma omp for schedule(static)
+    for (uint j=0; j<ny; j++){
+      plane->data[IDX(0, j+1)] = buffers[RECV][WEST][j];
     }
   }
 
   if (neigh[EAST] != MPI_PROC_NULL) {
+  #pragma omp for schedule(static)
     for (uint j=0; j<ny; j++){
-    plane->data[IDX(nx+1, j+1)] = buffers[RECV][EAST][j];
+      plane->data[IDX(nx+1, j+1)] = buffers[RECV][EAST][j];
     }
   }
+}
 
   // in the periodic case we are working in a sort of torus
   if (periodic && N[_x_] == 2) {
     if (neigh[WEST] != MPI_PROC_NULL) {
+      #pragma omp parallel for schedule(static)
       for (uint j=0; j<ny; j++){
-      plane->data[IDX(nx+1, j+1)] = buffers[RECV][WEST][j];
+        plane->data[IDX(nx+1, j+1)] = buffers[RECV][WEST][j];
       }
     }
 
     if (neigh[EAST] != MPI_PROC_NULL) {
+      #pragma omp parallel for schedule(static)
       for (uint j=0; j<ny; j++){
-      plane->data[IDX(0, j+1)] = buffers[RECV][EAST][j];
+        plane->data[IDX(0, j+1)] = buffers[RECV][EAST][j];
       }
     }
   }
+
 
   #undef IDX
   return 0;

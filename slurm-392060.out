@@ -1,4 +1,0 @@
-[*] L2-view (LL = L2 = 524288,8,64)
-srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
-slurmstepd: error: *** JOB 392060 ON epyc008 CANCELLED AT 2025-09-07T17:22:30 DUE TO TIME LIMIT ***
-slurmstepd: error: *** STEP 392060.0 ON epyc008 CANCELLED AT 2025-09-07T17:22:30 DUE TO TIME LIMIT ***

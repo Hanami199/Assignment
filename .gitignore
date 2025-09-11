@@ -5,3 +5,6 @@ plot_parallel.py
 plot_threadsrankratio.py
 plot_results.py
 plot_results_leonardo.py
+comm_overhead.py
+plot_weak_comm.py
+plot.py
